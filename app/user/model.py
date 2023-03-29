@@ -26,7 +26,8 @@ class User(db.Model):
         self.is_deleted = True
         self.update()
     
-    def generate_password(self):
+    @staticmethod
+    def generate_password():
         alphabet = string.ascii_letters + string.digits
         password = ''.join(secrets.choice(alphabet) for i in range(10))
         return password
