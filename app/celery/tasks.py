@@ -18,7 +18,9 @@ from email.mime.multipart import MIMEMultipart
 
 
 @celery.task
-def send_mail(subject, text, html, recipients, attachments=[]):
+def send_mail(subject, text, html, recipients, attachments=None):
+    if attachments is None:
+        attachments = []
     sender = os.environ.get('MAIL_USERNAME')
     receiver = ",".join(recipients)
     password = os.environ.get('MAIL_PASSWORD')
